@@ -10,6 +10,8 @@ import { ServerComponent } from './servers/server/server.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './services/auth-guard-service';
 import { CanDeactivateGuard } from './services/canDeactivateService';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { Serverresolver } from './servers/server-resolver-service';
 
 export const appRoutes: Routes = [
   {
@@ -36,6 +38,7 @@ export const appRoutes: Routes = [
       {
         path: ':id',
         component: ServerComponent,
+        resolve: { server: Serverresolver },
       },
       {
         path: ':id/edit',
@@ -44,9 +47,14 @@ export const appRoutes: Routes = [
       },
     ],
   },
+  // {
+  //   path: 'not-found',
+  //   component: PageNotFoundComponent,
+  // },
   {
     path: 'not-found',
-    component: PageNotFoundComponent,
+    component: ErrorPageComponent,
+    data: { message: 'Page not Found' },
   },
   {
     path: '**',
