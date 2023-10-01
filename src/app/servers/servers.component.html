@@ -3,7 +3,9 @@
     <div class="list-group">
       <ng-container *ngFor="let server of servers">
         <a
-          [routerLink]="['/servers', server.id, 'edit']"
+          [routerLink]="['/servers', server.id]"
+          [queryParams]="{ allowEdit: server.id === 3 ? '1' : '0' }"
+          fragment="loading"
           class="list-group-item"
         >
           {{ server.name }}
@@ -12,9 +14,10 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <app-edit-server></app-edit-server>
+    <router-outlet></router-outlet>
+    <!-- <app-edit-server></app-edit-server>
     <hr />
     <app-server></app-server>
-    <button class="btn btn-Primary" (click)="onrefresh()">Refresh me</button>
+    <button class="btn btn-Primary" (click)="onrefresh()">Refresh me</button> -->
   </div>
 </div>
